@@ -41,3 +41,15 @@
     ```bash
     composer phpstan analyse
     ```
+
+
+## Pest
+
+Install fswatch:
+```bash
+sudo apt install fswatch
+```
+
+Install the PHPStorm plugin:
+https://plugins.jetbrains.com/plugin/14636-pest
+
