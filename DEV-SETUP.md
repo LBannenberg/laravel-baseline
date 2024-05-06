@@ -75,3 +75,21 @@ sudo apt install fswatch
 Install the PHPStorm plugin:
 https://plugins.jetbrains.com/plugin/14636-pest
 
+
+## Mail for Testing
+1. Configure in .env:
+
+    ```
+    MAIL_MAILER=smtp
+    MAIL_HOST=127.0.0.1
+    MAIL_PORT=1025
+    MAIL_USERNAME=null
+    MAIL_PASSWORD=null
+    MAIL_ENCRYPTION=null
+    MAIL_FROM_ADDRESS="hello@example.com"
+    MAIL_FROM_NAME="${APP_NAME}"
+    ```
+
+2. Make sure https://github.com/tighten/takeout is installed
+3. Enable mailpit or mailhog listening to port 1025
+4. Browse to localhost:8025 (default web port for mailpit)
