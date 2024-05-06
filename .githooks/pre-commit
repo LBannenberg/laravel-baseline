@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Get PHP files that were changed in this commit
+files=$(git diff --cached --name-only --diff-filter=ACM -- '*.php');
+
+# Pint up those files
+vendor/bin/pint $files -q
+
+# Add them back to the commit
+git add $files
+
+
+# Source: https://laraveldaily.com/post/laravel-pint-pre-commit-hooks-github-actions
