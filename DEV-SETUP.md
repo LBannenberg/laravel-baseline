@@ -9,6 +9,28 @@
 - Create a pint.json: https://laravel.com/docs/11.x/pint
 - Configure it in PHPStorm: https://www.jetbrains.com/help/phpstorm/using-laravel-pint.html
 
+### Set up Git pre-commit hook:
+1. Create a file at .git/hooks/precommit with contents:
+    ```bash
+    #!/bin/sh
+    
+    # Get PHP files that were changed in this commit
+    files=$(git diff --cached --name-only --diff-filter=ACM -- '*.php');
+    
+    # Pint up those files
+    vendor/bin/pint $files -q
+     
+    # Add them back to the commit
+    git add $files
+    
+    # Source: https://laraveldaily.com/post/laravel-pint-pre-commit-hooks-github-actions
+    ```
+
+2. make it executable:
+    ```bash
+    chmod +x pre-commit
+    ```
+
 ## Larastan
 
 - Install it: https://github.com/larastan/larastan
