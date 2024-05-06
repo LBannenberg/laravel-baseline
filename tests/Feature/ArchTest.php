@@ -68,3 +68,8 @@ arch('All Enums should be backed')
     ->expect('App\Enums')
     ->enums()
     ->toBeStringBackedEnums();
+
+arch('Enums should be located only in App\Enums')
+    ->expect('App')
+    ->not->toBeEnums()
+    ->ignoring('App\Enums');
