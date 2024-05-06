@@ -64,7 +64,7 @@ arch('Value objects do not implement interfaces')
     ->expect('App\ValueObjects')
     ->toImplementNothing();
 
-arch('All Enums should be backed')
+arch('All Enums should be string backed')
     ->expect('App\Enums')
     ->enums()
     ->toBeStringBackedEnums();
