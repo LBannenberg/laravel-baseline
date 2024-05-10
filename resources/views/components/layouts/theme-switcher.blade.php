@@ -36,7 +36,7 @@
             <button
                 x-cloak
                 class="block p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800"
-                :class="theme ? 'text-gray-700 dark:text-gray-300' : 'text-gray-400 dark:text-gray-600 hover:text-gray-500 focus:text-gray-500 dark:hover:text-gray-500 dark:focus:text-gray-500'"
+                :class="theme ? 'text-gray-300 dark:text-gray-300' : 'text-gray-400 dark:text-gray-600 hover:text-gray-500 focus:text-gray-500 dark:hover:text-gray-500 dark:focus:text-gray-500'"
             >
                 <x-heroicon-c-sun class="block dark:hidden w-5 h-5"/>
                 <x-heroicon-c-moon class="hidden dark:block w-5 h-5"/>
