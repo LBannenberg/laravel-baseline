@@ -52,7 +52,7 @@ test('profile menu can be rendered', function () {
 
     $response
         ->assertOk()
-        ->assertSeeVolt('layout.profile-menu');
+        ->assertSeeVolt('layouts.app.profile-menu');
 });
 
 test('users can logout', function () {

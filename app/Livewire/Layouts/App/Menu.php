@@ -2,43 +2,47 @@
 
 declare(strict_types=1);
 
-namespace App\View\Components\Layouts\App;
+namespace App\Livewire\Layouts\App;
 
-use App\Enums\UserRole;
-use Illuminate\View\Component;
+use App\Livewire\Actions\Logout;
+use Livewire\Attributes\Locked;
+use Livewire\Component;
 
-abstract class AbstractMenu extends Component
+class Menu extends Component
 {
-    protected function getItems(): array
+    #[Locked]
+    public string $menuType;
+
+    public array $items = [];
+
+    public function mount(string $menuType): void
     {
-        $items = $this->generateBaseItems();
+        $this->menuType = $menuType;
+        $items = config('menu.app');;
         $items = $this->applyGates($items);
         $items = $this->applyTranslations($items);
         $items = $this->applyRoutes($items);
-        return $items;
+        $this->items = $items;
     }
 
-    private function generateBaseItems(): array
+    public function render()
     {
-        return [
-            [
-                'label' => 'Dashboard',
-                'icon' => 'heroicon-m-chart-bar-square',
-                'route' => 'dashboard',
-            ],
-            [
-                'label' => 'Pulse',
-                'icon' => 'heroicon-c-signal',
-                'route' => 'pulse',
-                'roles' => [UserRole::Admin]
-            ],
-            [
-                'label' => 'Demo',
-                'icon' => 'heroicon-c-eye',
-                'route' => 'demo'
-            ]
-        ];
+        return $this->menuType == 'sidebar'
+            ? view('livewire.layouts.app.menu-sidebar')
+            : view('livewire.layouts.app.menu-mobile');
     }
+
+
+    /**
+     * Log the current user out of the application.
+     */
+    public function logout(Logout $logout): void
+    {
+        $logout();
+
+        $this->redirect('/', navigate: true);
+    }
+
 
     private function applyGates(array $items): array
     {
@@ -77,7 +81,4 @@ abstract class AbstractMenu extends Component
         }
         return $items;
     }
-
-
-
 }

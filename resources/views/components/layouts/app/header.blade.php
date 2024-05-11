@@ -16,12 +16,12 @@
                 </h2>
             </div>
             <div class="flex-none self-center">
-                <livewire:layout.profile-menu/>
+                <livewire:layouts.app.profile-menu/>
             </div>
             <div class="flex-none self-center">
                 <x-layouts.theme-switcher/>
             </div>
         </div>
     </header>
-    <x-layouts.app.mobile-menu/>
+    <livewire:layouts.app.menu menuType="mobile" />
 </div>

@@ -22,7 +22,7 @@
 
     <x-layouts.app.header :$header/>
 
-    <x-layouts.app.desktop-menu/>
+    <livewire:layouts.app.menu menuType="sidebar" />
 
 
     <!-- Page Content -->
