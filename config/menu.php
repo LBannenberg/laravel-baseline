@@ -13,12 +13,12 @@ return [
             'label' => 'Pulse',
             'icon' => 'heroicon-c-signal',
             'route' => 'pulse',
-            'roles' => [UserRole::Admin]
+            'roles' => [UserRole::Admin],
         ],
         [
             'label' => 'Demo',
             'icon' => 'heroicon-c-eye',
-            'route' => 'demo'
-        ]
-    ]
+            'route' => 'demo',
+        ],
+    ],
 ];
