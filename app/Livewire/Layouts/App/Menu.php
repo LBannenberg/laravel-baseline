@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Livewire\Layouts\App;
 
 use App\Livewire\Actions\Logout;
+use App\Values\MenuItem;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 
@@ -13,11 +14,16 @@ class Menu extends Component
     #[Locked]
     public string $menuType;
 
+    /**
+     * @var MenuItem[]
+     */
     public array $items = [];
 
     public function mount(string $menuType): void
     {
         $this->menuType = $menuType;
+
+        /** @var MenuItem[] $items */
         $items = config('menu.app');
         $items = $this->applyGates($items);
         $items = $this->applyTranslations($items);
@@ -29,7 +35,8 @@ class Menu extends Component
     {
         return match ($this->menuType) {
             'sidebar' => view('livewire.layouts.app.menu-sidebar'),
-            'mobile' => view('livewire.layouts.app.menu-mobile')
+            'mobile' => view('livewire.layouts.app.menu-mobile'),
+            default => throw new \InvalidArgumentException("No view defined for menuType $this->menuType")
         };
     }
 
@@ -43,17 +50,22 @@ class Menu extends Component
         $this->redirect('/', navigate: true);
     }
 
+    /**
+     * @param  MenuItem[]  $items
+     * @return MenuItem[]
+     */
     private function applyGates(array $items): array
     {
         $result = [];
         foreach ($items as $item) {
-            if (! isset($item['roles'])) {
+            if (! $item->roles) {
                 $result[] = $item;
 
                 continue;
             }
 
-            if (in_array(auth()->user()?->role, $item['roles'])) {
+            // @phpstan-ignore-next-line (doesn't understand that user->role is a cast to enum)
+            if (in_array(auth()->user()?->role, $item->roles)) {
                 $result[] = $item;
             }
         }
@@ -61,25 +73,31 @@ class Menu extends Component
         return $result;
     }
 
+    /**
+     * @param  MenuItem[]  $items
+     * @return MenuItem[]
+     */
     private function applyTranslations(array $items): array
     {
-        foreach ($items as &$item) {
-            $item['label'] = __($item['label']);
+        foreach ($items as $item) {
+            $item->label = (string) __($item->label);
         }
 
         return $items;
     }
 
+    /**
+     * @param  MenuItem[]  $items
+     * @return MenuItem[]
+     */
     private function applyRoutes(array $items): array
     {
-        foreach ($items as &$item) {
-            if (! isset($item['route'])) {
-                $item['active'] = false;
-
+        foreach ($items as $item) {
+            if (! $item->route) {
                 continue;
             }
-            $item['active'] = request()->routeIs($item['route']);
-            $item['route'] = route($item['route']);
+            $item->active = request()->routeIs($item->route);
+            $item->url = route($item->route);
         }
 
         return $items;
