@@ -9,17 +9,19 @@
                                 'border-primary dark:border-primaryDark text-primary dark:text-primaryDark' => $item['active'],
                                 'border-secondary dark:border-lightDark text-light dark:text-secondaryDark' => !$item['active']
                                 ])>
-                        <a href="{{$item['route']}}" class="p-2 block">
+                        <a href="{{$item['route']}}" class="p-2 block" wire:navigate>
                             <x-dynamic-component component="{{$item['icon']}}" class="w-8 h-8 inline"/>
                             {{$item['label']}}</a>
                     </li>
                 @else
-                    <li x-data="{ open: {{$item['active'] ? 'true': 'false'}} }" @class([
-                                'rounded-md border-2 bg-dark dark:bg-darkDark hover:border-info hover:text-info dark:hover:text-infoDark',
-                                'border-primary dark:border-primaryDark text-primary dark:text-primaryDark' => $item['active'],
-                                'border-secondary dark:border-lightDark text-light dark:text-secondaryDark' => !$item['active']
+                    <li x-data="{ open: {{$item['active'] ? 'true': 'false'}} }" x-cloak
+                        x-on:click="open = ! open" @click.outside="open = {{$item['active'] ? 'true': 'false'}}"
+                        @class([
+                                'rounded-md border-2 bg-dark dark:bg-darkDark text-light dark:text-secondaryDark hover:border-info hover:text-info dark:hover:text-infoDark',
+                                'border-primary dark:border-primaryDark' => $item['active'],
+                                'border-secondary dark:border-lightDark' => !$item['active']
                                 ])>
-                        <span x-on:click="open = ! open" class="p-2 block">
+                        <span class="p-2 block">
                             <x-dynamic-component component="{{$item['icon']}}" class="w-8 h-8 inline"/>
                             {{$item['label']}}</span>
 
@@ -29,7 +31,7 @@
                                             'text-primary dark:text-primaryDark' => $childItem['active'],
                                             'text-light dark:text-secondaryDark' => !$childItem['active']
                                             ])>
-                                    <a href="{{$childItem['route']}}" class="p-2 block">
+                                    <a href="{{$childItem['route']}}" class="p-2 block" wire:navigate>
                                         <x-dynamic-component component="{{$childItem['icon']}}" class="w-8 h-8 inline"/>
                                         {{$childItem['label']}}</a>
                                 </li>
