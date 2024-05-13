@@ -18,6 +18,17 @@ return [
                     'icon' => 'heroicon-c-eye',
                     'route' => 'demo',
                 ],
+                [
+                    'label' => 'Pulse',
+                    'icon' => 'heroicon-c-signal',
+                    'route' => 'pulse',
+                    'roles' => [UserRole::Admin],
+                ],[
+                    'label' => 'Pulse',
+                    'icon' => 'heroicon-c-signal',
+                    'route' => 'pulse',
+                    'roles' => [UserRole::Admin],
+                ],
             ],
         ],
         [

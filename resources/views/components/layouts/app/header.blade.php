@@ -7,7 +7,7 @@
     <header class="bg-dark dark:bg-darkDark shadow">
         <div class="max-w-7xl flex mx-auto gap-2 py-4 px-4 sm:px-6 lg:px-8 ">
             <div class="flex-none self-center">
-                <x-layouts.hamburger/>
+                <livewire:layouts.app.menu menuType="mobile" />
             </div>
             <div class="flex-auto self-center">
                 <!-- page title -->
@@ -23,5 +23,4 @@
             </div>
         </div>
     </header>
-    <livewire:layouts.app.menu menuType="mobile" />
 </div>

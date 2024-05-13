@@ -29,7 +29,8 @@ class Menu extends Component
     {
         return match ($this->menuType) {
             'sidebar' => view('livewire.layouts.app.menu-sidebar'),
-            'mobile' => view('livewire.layouts.app.menu-mobile')
+            'mobile' => view('livewire.layouts.app.menu-mobile'),
+            default => throw new \InvalidArgumentException("Unknown menu type '{$this->menuType}'"),
         };
     }
 
