@@ -10,9 +10,15 @@ return [
             'route' => 'dashboard',
         ],
         [
-            'label' => 'Demo',
-            'icon' => 'heroicon-c-eye',
-            'route' => 'demo',
+            'label' => 'Theme',
+            'icon' => 'heroicon-c-academic-cap',
+            'children' => [
+                [
+                    'label' => 'Demo',
+                    'icon' => 'heroicon-c-eye',
+                    'route' => 'demo',
+                ],
+            ],
         ],
         [
             'label' => 'System',
