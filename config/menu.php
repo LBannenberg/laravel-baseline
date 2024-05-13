@@ -10,15 +10,22 @@ return [
             'route' => 'dashboard',
         ],
         [
-            'label' => 'Pulse',
-            'icon' => 'heroicon-c-signal',
-            'route' => 'pulse',
-            'roles' => [UserRole::Admin],
-        ],
-        [
             'label' => 'Demo',
             'icon' => 'heroicon-c-eye',
             'route' => 'demo',
+        ],
+        [
+            'label' => 'System',
+            'icon' => 'heroicon-c-cog',
+            'roles' => [UserRole::Admin],
+            'children' => [
+                [
+                    'label' => 'Pulse',
+                    'icon' => 'heroicon-c-signal',
+                    'route' => 'pulse',
+                    'roles' => [UserRole::Admin],
+                ],
+            ],
         ],
     ],
 ];

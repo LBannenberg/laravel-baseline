@@ -47,6 +47,10 @@ class Menu extends Component
     {
         $result = [];
         foreach ($items as $item) {
+            if (isset($item['children'])) {
+                $item['children'] = $this->applyGates($item['children']);
+            }
+
             if (! isset($item['roles'])) {
                 $result[] = $item;
 
@@ -64,6 +68,9 @@ class Menu extends Component
     private function applyTranslations(array $items): array
     {
         foreach ($items as &$item) {
+            if (isset($item['children'])) {
+                $item['children'] = $this->applyTranslations($item['children']);
+            }
             $item['label'] = __($item['label']);
         }
 
@@ -73,7 +80,21 @@ class Menu extends Component
     private function applyRoutes(array $items): array
     {
         foreach ($items as &$item) {
-            if (! isset($item['route'])) {
+            if (isset($item['children'])) {
+                $item['children'] = $this->applyRoutes($item['children']);
+            }
+            $childActive = array_reduce(
+                $item['children'] ?? [],
+                fn ($carry, $child) => $carry || $child['active'],
+                initial: false
+            );
+            if ($childActive) {
+                $item['active'] = true;
+
+                continue;
+            }
+
+            if (! isset($item['route']) || ! $item['route']) {
                 $item['active'] = false;
 
                 continue;
