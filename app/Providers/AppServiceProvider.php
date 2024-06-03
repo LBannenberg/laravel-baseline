@@ -26,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::preventLazyLoading(! app()->isProduction());
+        Model::preventAccessingMissingAttributes();
+        Model::preventSilentlyDiscardingAttributes();
 
         Gate::define('viewPulse', function (User $user) {
             return $user->role == UserRole::Admin;
