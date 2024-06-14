@@ -1,0 +1,24 @@
+{
+	"name": "corrivate/theme",
+	"description": "",
+	"type": "library",
+	"version": "1.0",
+	"license": "proprietary",
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"Corrivate\\Theme\\": "src/",
+			"Corrivate\\Theme\\Tests\\": "tests/",
+			"Corrivate\\Theme\\Database\\Factories\\": "database/factories/",
+			"Corrivate\\Theme\\Database\\Seeders\\": "database/seeders/"
+		}
+	},
+	"minimum-stability": "stable",
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Corrivate\\Theme\\Providers\\ThemeServiceProvider"
+			]
+		}
+	}
+}

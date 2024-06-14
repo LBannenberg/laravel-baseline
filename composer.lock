@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "921839d4a207d0e2578d5a6ad3b5a0bc",
+    "content-hash": "d65afd91dbdc89876855b1b1440eaefe",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -914,6 +914,38 @@
                 }
             ],
             "time": "2024-05-06T16:37:16+00:00"
+        },
+        {
+            "name": "corrivate/theme",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "app-modules/theme",
+                "reference": "f794a6a2f488574ac18faa5c3f605c2cb46642d7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Corrivate\\Theme\\Providers\\ThemeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Corrivate\\Theme\\": "src/",
+                    "Corrivate\\Theme\\Tests\\": "tests/",
+                    "Corrivate\\Theme\\Database\\Factories\\": "database/factories/",
+                    "Corrivate\\Theme\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "dflydev/dot-access-data",
