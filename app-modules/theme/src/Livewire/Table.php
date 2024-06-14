@@ -4,31 +4,37 @@ declare(strict_types=1);
 
 namespace Corrivate\Theme\Livewire;
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+/**
+ * Based on https://fly.io/laravel-bytes/reusable-dynamic-tables-with-laravel-livewire/
+ */
 abstract class Table extends Component
 {
     use WithPagination;
 
-    public $perPage = 10;
+    public int $perPage = 10;
 
-    public $page = 1;
+    public int $page = 1;
 
-    public $sortBy = '';
+    public string $sortBy = '';
 
-    public $sortDirection = 'asc';
+    public string $sortDirection = 'asc';
 
-    public function render(): \Illuminate\Contracts\View\View
+    public function render(): View
     {
         return view('theme::livewire.table');
     }
 
-    abstract public function query(): \Illuminate\Database\Eloquent\Builder;
+    abstract public function query(): Builder;
 
     abstract public function columns(): array;
 
-    public function data(): \Illuminate\Pagination\LengthAwarePaginator
+    public function data(): LengthAwarePaginator
     {
         return $this
             ->query()
