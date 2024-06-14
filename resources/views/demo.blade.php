@@ -1,4 +1,4 @@
-<x-layouts.app.main>
+<x-theme::layouts.app.main>
     <x-slot name="header">
         Leonardo da Vinci
     </x-slot>
@@ -139,4 +139,4 @@
         </p>
     </div>
 
-</x-layouts.app.main>
+</x-theme::layouts.app.main>

@@ -12,7 +12,7 @@
     </button>
 
     <!-- Menu -->
-    <div class="absolute top-16 left-0 min-w-72 max-w-80" @click.outside="open = false">
+    <div class="absolute z-20 top-16 left-0 min-w-72 max-w-80" @click.outside="open = false">
         <div :class="{'block': open, 'hidden': ! open}"
              x-transition
              class="hidden sm:hidden bg-dark text-light dark:bg-darkDark dark:text-lightDark border-2 border-white rounded-md ">

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Livewire\Layouts\App;
+namespace Corrivate\Theme\Livewire\Layouts\App;
 
 use App\Livewire\Actions\Logout;
 use Livewire\Attributes\Locked;
@@ -28,8 +28,8 @@ class Menu extends Component
     public function render(): \Illuminate\Contracts\View\View
     {
         return match ($this->menuType) {
-            'sidebar' => view('livewire.layouts.app.menu-sidebar'),
-            'mobile' => view('livewire.layouts.app.menu-mobile'),
+            'sidebar' => view('theme::livewire.layouts.app.menu-sidebar'),
+            'mobile' => view('theme::livewire.layouts.app.menu-mobile'),
             default => throw new \InvalidArgumentException("Unknown menu type '{$this->menuType}'"),
         };
     }

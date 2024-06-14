@@ -7,7 +7,7 @@
     <header class="bg-dark dark:bg-darkDark shadow">
         <div class="max-w-7xl flex mx-auto gap-2 py-4 px-4 sm:px-6 lg:px-8 ">
             <div class="flex-none self-center">
-                <livewire:layouts.app.menu menuType="mobile" />
+                <livewire:theme::layouts.app.menu menuType="mobile" />
             </div>
             <div class="flex-auto self-center">
                 <!-- page title -->
@@ -19,7 +19,7 @@
                 <livewire:layouts.app.profile-menu/>
             </div>
             <div class="flex-none self-center">
-                <x-layouts.theme-switcher/>
+                <x-theme::layouts.theme-switcher/>
             </div>
         </div>
     </header>

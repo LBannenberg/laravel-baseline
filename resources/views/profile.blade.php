@@ -1,4 +1,4 @@
-<x-layouts.app.main>
+<x-theme::layouts.app.main>
     <x-slot name="header">
         {{ __('Profile') }}
     </x-slot>
@@ -24,4 +24,4 @@
             </div>
         </div>
     </div>
-</x-layouts.app.main>
+</x-theme::layouts.app.main>

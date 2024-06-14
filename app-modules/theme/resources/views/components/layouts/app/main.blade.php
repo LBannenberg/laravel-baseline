@@ -20,9 +20,9 @@
 <div class="min-h-screen bg-light dark:bg-lightDark">
 
 
-    <x-layouts.app.header :$header/>
+    <x-theme::layouts.app.header :$header/>
 
-    <livewire:layouts.app.menu menuType="sidebar" />
+    <livewire:theme::layouts.app.menu menuType="sidebar" />
 
 
     <!-- Page Content -->
@@ -30,7 +30,7 @@
         <main class="py-6">
             {{ $slot }}
         </main>
-        <x-layouts.app.footer/>
+        <x-theme::layouts.app.footer/>
     </div>
 
 
