@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d65afd91dbdc89876855b1b1440eaefe",
+    "content-hash": "71ab4c1e556f4187e6f513a43ddc46ab",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -937,6 +937,38 @@
                     "Corrivate\\Theme\\Tests\\": "tests/",
                     "Corrivate\\Theme\\Database\\Factories\\": "database/factories/",
                     "Corrivate\\Theme\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "corrivate/user-management",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "app-modules/user-management",
+                "reference": "66984d556e51d5d5abec55c371068d1433acd222"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Corrivate\\UserManagement\\Providers\\UserManagementServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Corrivate\\UserManagement\\": "src/",
+                    "Corrivate\\UserManagement\\Tests\\": "tests/",
+                    "Corrivate\\UserManagement\\Database\\Factories\\": "database/factories/",
+                    "Corrivate\\UserManagement\\Database\\Seeders\\": "database/seeders/"
                 }
             },
             "license": [

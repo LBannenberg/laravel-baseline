@@ -23,11 +23,23 @@ return [
                     'icon' => 'heroicon-c-signal',
                     'route' => 'pulse',
                     'roles' => [UserRole::Admin],
-                ],[
+                ], [
                     'label' => 'Pulse',
                     'icon' => 'heroicon-c-signal',
                     'route' => 'pulse',
                     'roles' => [UserRole::Admin],
+                ],
+            ],
+        ],
+        [
+            'label' => 'Administration',
+            'icon' => 'heroicon-c-document',
+            'roles' => [UserRole::Admin],
+            'children' => [
+                [
+                    'label' => 'Users',
+                    'icon' => 'heroicon-c-user',
+                    'route' => 'user-management.listing',
                 ],
             ],
         ],
