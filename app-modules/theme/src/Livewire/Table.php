@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Corrivate\Theme\Livewire;
 
+use Corrivate\Theme\Table\Column;
+use Corrivate\Theme\Table\SearchType;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -25,6 +27,10 @@ abstract class Table extends Component
 
     public string $sortDirection = 'asc';
 
+    public array $searchBy = [
+        // override for specific tables
+    ];
+
     public function render(): View
     {
         return view('theme::livewire.table');
@@ -32,12 +38,15 @@ abstract class Table extends Component
 
     abstract public function query(): Builder;
 
+    /**
+     * @return Column[]
+     */
     abstract public function columns(): array;
 
     public function data(): LengthAwarePaginator
     {
         return $this
-            ->query()
+            ->searchBy()
             ->when($this->sortBy !== '', function ($query) {
                 $query->orderBy($this->sortBy, $this->sortDirection);
             })
@@ -57,5 +66,39 @@ abstract class Table extends Component
 
         $this->sortBy = $key;
         $this->sortDirection = 'asc';
+    }
+
+    protected function searchBy(): Builder
+    {
+        $query = $this->query();
+        foreach ($this->columns() as $column) {
+            if ($column->searchType == SearchType::Is && ! empty($this->searchBy[$column->key])) {
+                $value = trim($this->searchBy[$column->key]);
+                $query->where($column->key, $value);
+            }
+            if ($column->searchType == SearchType::Like && ! empty($this->searchBy[$column->key])) {
+                $value = trim($this->searchBy[$column->key]);
+                $query->where($column->key, 'LIKE', "%$value%");
+            }
+            if ($column->searchType == SearchType::FromDateTo && ! empty($this->searchBy[$column->key]['from'])) {
+                $value = trim($this->searchBy[$column->key]['from']);
+                $query->where($column->key, '>=', $value);
+            }
+            if ($column->searchType == SearchType::FromDateTo && ! empty($this->searchBy[$column->key]['to'])) {
+                $value = trim($this->searchBy[$column->key]['to']);
+                $query->where($column->key, '<=', $value);
+            }
+            if ($column->searchType == SearchType::FromNumTo && ! empty($this->searchBy[$column->key]['to'])) {
+                $value = trim($this->searchBy[$column->key]['to']);
+                $query->where($column->key, '<=', $value);
+            }
+            if ($column->searchType == SearchType::SelectOne && ! empty($this->searchBy[$column->key])) {
+                $value = trim($this->searchBy[$column->key]);
+                $query->where($column->key, $value);
+            }
+
+        }
+
+        return $query;
     }
 }

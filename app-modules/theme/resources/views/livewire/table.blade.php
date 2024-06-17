@@ -1,3 +1,4 @@
+@php use Corrivate\Theme\Table\SearchType; @endphp
 <div>
     <div class="overflow-x-auto shadow-md rounded-lg">
         <table class="w-full text-sm text-left text-gray-500">
@@ -27,6 +28,35 @@
                         </div>
                     </th>
 
+                @endforeach
+            </tr>
+            <tr>
+                @foreach($this->columns() as $column)
+                    <th>
+                        <div class="py-3 px-6 flex items-center">
+                            @if($column->searchType == SearchType::Is || $column->searchType == SearchType::Like)
+                                <input type="text" wire:model.live.debounce.250ms="searchBy.{{$column->key}}" class="rounded-lg">
+                            @elseif($column->searchType == SearchType::FromDateTo)
+                                <div class="grow flex flex-col">
+                                    <div class="flex flex-row items-center gap-2"><label class="grow text-end">From</label><input class="flex-none rounded-lg" type="date" wire:model.live.debounce.250ms="searchBy.{{$column->key}}.from"></div>
+
+                                    <div class="flex flex-row items-center gap-2"><label class="grow text-end">To</label><input class="flex-none rounded-lg" type="date" wire:model.live.debounce.250ms="searchBy.{{$column->key}}.to"></div>
+                                </div>
+                            @elseif($column->searchType == SearchType::FromNumTo)
+                                <div class="flex flex-col">
+                                    <div class="flex flex-row items-center gap-2"><label class="grow text-end">From</label><input class="rounded-lg w-32" type="number" wire:model.live.debounce.250ms="searchBy.{{$column->key}}.from"></div>
+
+                                    <div class="flex flex-row items-center gap-2"><label class="grow text-end">To</label><input class="rounded-lg w-32" type="number" wire:model.live.debounce.250ms="searchBy.{{$column->key}}.to"></div>
+                                </div>
+                            @elseif($column->searchType == SearchType::SelectOne)
+                                <select wire:model.change="searchBy.{{$column->key}}" class="rounded-lg">
+                                    @foreach($column->options as $option)
+                                        <option value="{{$option->value}}" class="{{$option->class}}">{{$option->label}}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                    </th>
                 @endforeach
             </tr>
             </thead>
