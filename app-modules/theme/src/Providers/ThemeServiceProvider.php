@@ -14,7 +14,7 @@ class ThemeServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Volt::mount([
-            resource_path('../app-modules/theme/resources/views/livewire')
+            resource_path('../app-modules/theme/resources/views/livewire'),
         ]);
     }
 }
