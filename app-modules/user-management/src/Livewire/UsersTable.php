@@ -25,16 +25,19 @@ class UsersTable extends Table
     public function columns(): array
     {
         return [
-            Column::make('name', 'Name', SearchType::Like),
-            Column::make('email', 'Email', SearchType::Like),
+            Column::make('name', 'Name', SearchType::Like)->classes('w-[25%]'),
+            Column::make('email', 'Email', SearchType::Like)->classes('w-[25%]'),
             Column::make('role', 'Role', SearchType::SelectOne)->options(UserRole::toSelectOptions(withBlank: true)),
-            Column::make('status', 'Status', SearchType::SelectOne)->component('user-management::columns.users.status')->options([
-                new SelectOption('', '', ''),
-                new SelectOption('deleted', 'deleted', 'bg-red-500'),
-                new SelectOption('active', 'active', 'bg-green-500'),
-                new SelectOption('inactive', 'inactive', 'bg-gray-500'),
-            ]),
-            Column::make('created_at', 'Created At', SearchType::FromDateTo)->component('theme::columns.common.human-diff'),
+            Column::make('status', 'Status', SearchType::SelectOne)
+                ->component('user-management::columns.users.status')->options([
+                    new SelectOption('', '', ''),
+                    new SelectOption('deleted', 'deleted', 'bg-red-500'),
+                    new SelectOption('active', 'active', 'bg-green-500'),
+                    new SelectOption('inactive', 'inactive', 'bg-gray-500'),
+                ]),
+            Column::make('created_at', 'Created At', SearchType::FromDateTo)
+                ->component('theme::columns.common.human-diff')
+                ->classes('w-[25%] text-center'),
         ];
     }
 }

@@ -1,12 +1,12 @@
 @php use Corrivate\Theme\Table\SearchType; @endphp
 <div>
     <div class="overflow-x-auto shadow-md rounded-lg">
-        <table class="w-full text-sm text-left text-gray-500">
+        <table class="table-fixed w-full text-sm text-left text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
                 @foreach($this->columns() as $column)
-                    <th wire:click="sort('{{ $column->key }}')">
-                        <div class="py-3 px-6 flex items-center cursor-pointer">
+                    <th wire:click="sort('{{ $column->key }}')" class="{{$column->classes}}">
+                        <div class="py-3 px-6 cursor-pointer">
                             {{ $column->label }}
                             @if($sortBy === $column->key)
                                 @if ($sortDirection === 'asc')

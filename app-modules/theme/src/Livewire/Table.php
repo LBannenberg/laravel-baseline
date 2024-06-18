@@ -31,8 +31,15 @@ abstract class Table extends Component
         // override for specific tables
     ];
 
+    public int $totalWidth = 1;
+
     public function render(): View
     {
+        $this->totalWidth = array_sum(array_map(
+            fn ($c) => $c->classes,
+            $this->columns()
+        ));
+
         return view('theme::livewire.table');
     }
 

@@ -10,11 +10,12 @@ class Column
 {
     public array $options = [];
 
+    public string $classes = '';
+
     public function __construct(
         public string $key,
         public string $label,
         public SearchType $searchType = SearchType::None,
-        public string $width = '',
         public string $component = 'theme::columns.column',
     ) {
     }
@@ -38,6 +39,17 @@ class Column
     public function options(array $options): static
     {
         $this->options = $options;
+
+        return $this;
+    }
+
+    /**
+     * Set a tailwind fraction class like w-[25%] but be careful that the percentages sum up to no more than 100.
+     * Any unspent percentages will be divided among the columns without a set width class.
+     */
+    public function classes(string $width): static
+    {
+        $this->classes = $width;
 
         return $this;
     }
